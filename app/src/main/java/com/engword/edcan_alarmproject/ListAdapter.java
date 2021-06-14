@@ -1,19 +1,16 @@
 package com.engword.edcan_alarmproject;
 
 import android.content.Context;
-import android.os.Build;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListAdapter extends BaseAdapter {
 
@@ -45,38 +42,20 @@ public class ListAdapter extends BaseAdapter {
         }
 
         /* 'listview_custom'에 정의된 위젯에 대한 참조 획득 */
-        TextView tv_contents =  convertView.findViewById(R.id.tv_contents) ;
-        ImageButton DelBtn =  convertView.findViewById(R.id.deletebtn) ;
-        ImageButton ComBtn =  convertView.findViewById(R.id.completebtn) ;
-        // LinearLayout BackGround =  convertView.findViewById(R.id.listBG);
+        Button tv_contents =  convertView.findViewById(R.id.tv_contents);
 
         /* 각 리스트에 뿌려줄 아이템을 받아오는데 mMyItem 재활용 */
         final ListItem myItem = getItem(position);
 
         /* 각 위젯에 세팅된 아이템을 뿌려준다 */
-        tv_contents.setText(myItem.getContents());
+        tv_contents.setText("   "+myItem.getContents());
 
-//        if(myItem.getIsDaily()) {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                BackGround.setBackground(ContextCompat.getDrawable(context, R.drawable.listview_daily_layout));
-//            } else {
-//                BackGround.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.listview_daily_layout));
-//            }
-//        }
-//        else {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                BackGround.setBackground(ContextCompat.getDrawable(context, R.drawable.listview_layout));
-//            } else {
-//                BackGround.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.listview_layout));
-//            }
-//        }
-
-
-        /* (위젯에 대한 이벤트리스너)  */
-//        ComBtn.setOnClickListener(v -> {
-//            ListValues OnCom = new ListValues();
-//            OnCom.onComplete(myItem.getIsDaily(),position);
-//        });
+        tv_contents.setOnClickListener(v -> {
+            Intent intent = new Intent(ListActivity.mCon, ShowActivity.class);
+            intent.putExtra("content",myItem.getContents());
+            intent.putExtra("time",myItem.getTimes());
+            ListActivity.mCon.startActivity(intent);
+        });
 //
 //        DelBtn.setOnClickListener(v -> {
 //            ListValues OnDel = new ListValues();
