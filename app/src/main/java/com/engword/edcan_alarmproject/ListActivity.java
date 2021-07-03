@@ -3,6 +3,7 @@ package com.engword.edcan_alarmproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,7 +15,6 @@ public class ListActivity extends AppCompatActivity {
     public static Context mCon;
     ListAdapter adapter = new ListAdapter();
     private ListView mListView;
-    int a=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void pressAddBtn(View v) {
-        adapter.addItem(String.valueOf(a),String.valueOf(a++));
-        adapter.notifyDataSetChanged();
+        Intent intent = new Intent(this, AddActivity.class);
+        ListActivity.mCon.startActivity(intent);
     }
 }
