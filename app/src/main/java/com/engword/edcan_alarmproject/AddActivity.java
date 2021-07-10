@@ -2,6 +2,8 @@ package com.engword.edcan_alarmproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +19,10 @@ public class AddActivity extends AppCompatActivity {
         Button save = findViewById(R.id.save);
         EditText alarm = findViewById(R.id.alarmtext);
         EditText cont = findViewById(R.id.contenttext);
+
+//        SharedPreferences pref = getSharedPreferences("ListValue", Activity.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = pref.edit();
+
         save.setOnClickListener(v->{
             String alarmText = alarm.getText().toString();
             String contText = cont.getText().toString();

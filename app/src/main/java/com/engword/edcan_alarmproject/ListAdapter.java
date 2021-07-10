@@ -1,7 +1,9 @@
 package com.engword.edcan_alarmproject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 
 import java.util.ArrayList;
+
+import static com.engword.edcan_alarmproject.ListActivity.mCon;
 
 public class ListAdapter extends BaseAdapter {
 
@@ -49,29 +53,38 @@ public class ListAdapter extends BaseAdapter {
         tv_contents.setText("   "+myItem.getContents());
 
         tv_contents.setOnClickListener(v -> {
-            Intent intent = new Intent(ListActivity.mCon, ShowActivity.class);
+            Intent intent = new Intent(mCon, ShowActivity.class);
             intent.putExtra("content",myItem.getContents());
             intent.putExtra("time",myItem.getTimes());
-            ListActivity.mCon.startActivity(intent);
+            mCon.startActivity(intent);
         });
 //
 //        DelBtn.setOnClickListener(v -> {
 //            ListValues OnDel = new ListValues();
 //            OnDel.onDelete(position);
 //        });
-
         return convertView;
     }
 
-//    public interface onItemDelete{
-//        void onDelete(int Position);
-//    }
-//    public interface onItemComplete{
-//        void onComplete(boolean isD, int Position);
-//    }
-
     /* 아이템 데이터 추가를 위한 함수.*/
+    public void addItem_notPut(String contents, String times) {
+        ListItem mItem = new ListItem();
+
+        /* MyItem에 아이템을 setting한다. */
+        mItem.setContents(contents);
+        mItem.setTimes(times);
+
+        /* mItems에 MyItem을 추가한다. */
+        mItems.add(mItem);
+    }
     public void addItem(String contents, String times) {
+
+        SharedPreferences pref = mCon.getSharedPreferences("ListValue", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("Cnt",pref.getInt("Cnt",0)+1); //아이템 개수
+        editor.putString("Con"+pref.getInt("Cnt",0),contents);
+        editor.putString("Time"+pref.getInt("Cnt",0),times);
+        editor.apply();
 
         ListItem mItem = new ListItem();
 
@@ -81,7 +94,6 @@ public class ListAdapter extends BaseAdapter {
 
         /* mItems에 MyItem을 추가한다. */
         mItems.add(mItem);
-
     }
 
     public void deleteItem(int pos) {
