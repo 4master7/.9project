@@ -17,11 +17,11 @@
         <LinearLayout
             android:id="@+id/lin1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="75dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="1dp" />
         </LinearLayout>
 
         <ListView
@@ -39,6 +39,7 @@
             android:backgroundTint="@color/colorPrimary"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:src="@drawable/addicon"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="24dp"

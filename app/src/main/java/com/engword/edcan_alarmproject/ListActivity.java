@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -17,7 +18,6 @@ public class ListActivity extends AppCompatActivity {
     public static Context mCon;
     ListAdapter adapter = new ListAdapter();
     private ListView mListView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mCon = this;
@@ -36,7 +36,6 @@ public class ListActivity extends AppCompatActivity {
             }
             adapter.notifyDataSetChanged();
         }
-
         findViewById(R.id.feb_list_main).setOnClickListener(this::pressAddBtn);
     }
 
