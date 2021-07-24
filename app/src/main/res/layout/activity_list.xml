@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EAEAEA"
     tools:context=".ListActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
-        android:backgroundTint="@android:color/white"
+        android:background="#EAEAEA"
         tools:context="List_Main_Fragment">
 
         <LinearLayout
@@ -30,8 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/lin1"
             android:layout_alignParentStart="true"
-            android:divider="#000000"
-            android:dividerHeight="1px">
+            android:dividerHeight="15dp"
+            android:divider="#EAEAEA">
         </ListView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

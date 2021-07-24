@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -42,14 +43,31 @@ public class ListAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.listview_custom, parent, false);
         }
-        Button tv_contents =  convertView.findViewById(R.id.tv_contents);
+        LinearLayout bg = convertView.findViewById(R.id.listBG);
+        TextView OzenOhu =  convertView.findViewById(R.id.dayornight);
+        TextView timeText =  convertView.findViewById(R.id.timeTx);
         Button del = convertView.findViewById(R.id.del);
 
         final ListItem myItem = getItem(position);
 
-        tv_contents.setText("   "+myItem.getContents());
+        int h = Integer.parseInt(myItem.getTimes().split(":")[0]);
+        int m = Integer.parseInt(myItem.getTimes().split(":")[1]);
+        if(h>=0&&h<=11)
+            OzenOhu.setText("오전");
+        else {
+            OzenOhu.setText("오후");
+            h-=12;
+        }
+        if(h==0)
+            h=12;
+        String a = h+":";
+        if(m<10)
+            a+="0"+m;
+        else
+            a+=Integer.toString(m);
+        timeText.setText(a);
 
-        tv_contents.setOnClickListener(v -> {
+        bg.setOnClickListener(v -> {
             Intent intent = new Intent(mCon, ShowActivity.class);
             intent.putExtra("content",myItem.getContents());
             intent.putExtra("time",myItem.getTimes());

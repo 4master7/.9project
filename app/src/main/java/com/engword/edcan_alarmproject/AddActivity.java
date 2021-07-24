@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.util.Date;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -17,22 +21,18 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         Button back = findViewById(R.id.back);
         Button save = findViewById(R.id.save);
-        EditText alarm = findViewById(R.id.alarmtext);
         EditText cont = findViewById(R.id.contenttext);
-
-//        SharedPreferences pref = getSharedPreferences("ListValue", Activity.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
+        TimePicker picker = findViewById(R.id.timepick);
+        String time = new SimpleDateFormat("HH:mm").format(new Date(System.currentTimeMillis()));
+        picker.setHour(Integer.parseInt(time.split(":")[0]));
+        picker.setMinute(Integer.parseInt(time.split(":")[1]));
 
         save.setOnClickListener(v->{
-            String alarmText = alarm.getText().toString();
+            String alarm = picker.getHour()+":"+picker.getMinute();
             String contText = cont.getText().toString();
-            if(!alarmText.isEmpty()&&!contText.isEmpty()){
-                ((ListActivity)ListActivity.mCon).adapter.addItem(contText,alarmText);
-                ((ListActivity)ListActivity.mCon).adapter.notifyDataSetChanged();
-                finish();
-            }
-            else
-                Toast.makeText(this, "모두 채워주세요", Toast.LENGTH_SHORT).show();
+            ((ListActivity)ListActivity.mCon).adapter.addItem(contText,alarm);
+            ((ListActivity)ListActivity.mCon).adapter.notifyDataSetChanged();
+            finish();
         });
 
         back.setOnClickListener(v->{
