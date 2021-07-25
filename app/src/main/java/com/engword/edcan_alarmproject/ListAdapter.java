@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import java.util.ArrayList;
 
 import static com.engword.edcan_alarmproject.ListActivity.mCon;
@@ -43,7 +45,7 @@ public class ListAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.listview_custom, parent, false);
         }
-        LinearLayout bg = convertView.findViewById(R.id.listBG);
+        ConstraintLayout bg = convertView.findViewById(R.id.listBG);
         TextView OzenOhu =  convertView.findViewById(R.id.dayornight);
         TextView timeText =  convertView.findViewById(R.id.timeTx);
         Button del = convertView.findViewById(R.id.del);
@@ -71,6 +73,7 @@ public class ListAdapter extends BaseAdapter {
             Intent intent = new Intent(mCon, ShowActivity.class);
             intent.putExtra("content",myItem.getContents());
             intent.putExtra("time",myItem.getTimes());
+            intent.putExtra("pos",position);
             mCon.startActivity(intent);
         });
         del.setOnClickListener(v -> {
@@ -109,5 +112,16 @@ public class ListAdapter extends BaseAdapter {
         editor.putInt("Cnt",pref.getInt("Cnt",0)-1);
         editor.apply();
         Toast.makeText(mCon,"삭제하였습니다!", Toast.LENGTH_SHORT).show();
+    }
+    public void setmItem(String time, String cont, int position){
+        ListItem tmp = new ListItem();
+        tmp.setTimes(time);
+        tmp.setContents(cont);
+        mItems.set(position, tmp);
+        SharedPreferences pref = mCon.getSharedPreferences("ListValue", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("Con"+position,cont);
+        editor.putString("Time"+position,time);
+        editor.apply();
     }
 }

@@ -1,54 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/listBG"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/edittextstyle2"
         android:orientation="horizontal">
-        <TextView
-            android:background="#FFFFFF"
-            android:id="@+id/dayornight"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingStart="20sp"
-            android:paddingTop="10sp"
-            android:text="오전"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textSize="15sp"
-            android:gravity="center_vertical"/>
-        <TextView
-            android:background="#FFFFFF"
-            android:id="@+id/timeTx"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="#00FFFFFF"
+            android:id="@+id/one"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="00:00"
-            android:paddingStart="5sp"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:gravity="center_vertical"/>
+            app:layout_constraintHorizontal_weight="8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/two"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            <TextView
+                android:background="#00FFFFFF"
+                android:id="@+id/dayornight"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="20sp"
+                android:paddingTop="10sp"
+                android:text="오전"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/timeTx"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:background="#00FFFFFF"
+                android:id="@+id/timeTx"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="5sp"
+                android:text="00:00"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/dayornight"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="#00FFFFFF"
+            android:id="@+id/two"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/one"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
             <Button
                 android:id="@+id/del"
-                android:background="@drawable/trashcanicon"
-                android:backgroundTint="@color/colorPrimary"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="5dp" />
-        </LinearLayout>
-    </LinearLayout>
+                android:background="@drawable/trashcanicon"
+                android:backgroundTint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="#EAEAEA" />
 </LinearLayout>
