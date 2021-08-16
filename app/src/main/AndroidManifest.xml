@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoadingActivity">
+        <activity android:name=".ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,14 @@
             android:name=".AddActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ShowActivity" />
-        <activity android:name=".ListActivity"/>
+
+        <receiver
+            android:name=".AlarmBroadcastReceiver"
+            android:enabled="true">
+        </receiver>
+        <service
+            android:name=".AlarmIntentService"
+            android:exported="false" />
     </application>
 
 </manifest>
